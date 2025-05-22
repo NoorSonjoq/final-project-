@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <h2><i class="fas fa-box"></i> Product Management</h2>
+        <ul>
+          <li><a href="Manage Products.html" class="active"><i class="fas fa-box"></i> Manage Products</a></li>
+          <li><a href="../login&Register/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </aside>
+
+      <div class="main-content">
+        <h1>All Products</h1>
+        <table id="productTable">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Category</th>
+             <th>description</th>
+
+              <th>Price</th>
+              <th>image</th>
+
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- بيانات المنتجات سيتم إضافتها هنا -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="manageProducts.js"></script>
+  </body>
+</html>
