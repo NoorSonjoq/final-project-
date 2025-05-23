@@ -1,4 +1,4 @@
-// بيانات العربة (تمثل المنتجات في العربة مع كمية السعر)
+// بيانات العربة
 let cart = [
   {
     id: 1,
@@ -14,8 +14,23 @@ let cart = [
     quantity: 2,
     image: "./images/Women's Bags2.jpeg",
   },
-  // يمكن إضافة المزيد من المنتجات هنا
 ];
+
+// تحديث كمية منتج في العربة
+function updateQuantity(itemId, newQuantity) {
+  newQuantity = parseInt(newQuantity);
+  if (newQuantity < 1 || isNaN(newQuantity)) {
+    alert("الكمية يجب أن تكون رقم صحيح أكبر من 0");
+    displayCartItems(); // لإعادة تعيين القيمة القديمة
+    return;
+  }
+
+  const item = cart.find(product => product.id === itemId);
+  if (item) {
+    item.quantity = newQuantity;
+  }
+  displayCartItems();
+}
 
 // عرض المنتجات في العربة
 function displayCartItems() {
@@ -34,7 +49,10 @@ function displayCartItems() {
       <div>
         <h3>${item.name}</h3>
         <p>${item.price} JD</p>
-        <p>Quantity: <span class="quantity">${item.quantity}</span></p>
+        <p>
+          Quantity: 
+          <input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${item.id}, this.value)" />
+        </p>
       </div>
       <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
     `;
@@ -81,28 +99,18 @@ function setPaymentOption(option) {
   }
 }
 
-// إضافة أحداث زر "الذهاب إلى الدفع"
+// أحداث الأزرار وخيارات الدفع
 document.getElementById('checkoutButton').addEventListener('click', showConfirmationModal);
-
-// إضافة أحداث زر إغلاق النافذة
 document.getElementById('closeModal').addEventListener('click', closeModal);
-
-// إضافة أحداث خيارات الدفع
 document.getElementById('cashOption').addEventListener('click', () => setPaymentOption('cash'));
 document.getElementById('cardOption').addEventListener('click', () => setPaymentOption('card'));
-
-// إضافة أحداث زر تأكيد الشراء
 document.getElementById('confirmPurchase').addEventListener('click', () => {
-  // إغلاق نافذة التأكيد
   closeModal();
-
-  // إظهار رسالة التأكيد
   const confirmationMessage = document.getElementById('confirmationMessage');
   confirmationMessage.style.display = 'block';
 
-  // إخفاء رسالة التأكيد بعد 3 ثوانٍ
   setTimeout(() => {
-    confirmationMessage.style.display = 'none'; // إخفاء رسالة التأكيد بعد 3 ثوانٍ
+    confirmationMessage.style.display = 'none';
   }, 3000);
 });
 

@@ -35,23 +35,26 @@ window.addEventListener("click", event => {
   }
 });
 
-// // إرسال طلب POST لإضافة منتج جديد
-// function addProduct(product) {
-//   fetch("http://localhost:5000/api/products", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(product),
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log("Product added:", data);
-//     })
-//     .catch(error => {
-//       console.error("Error adding product:", error);
-//     });
-// }
+// عند تحميل الصفحة
+window.addEventListener('DOMContentLoaded', async () => {
+  const res = await fetch('/api/products');
+  const products = await res.json();
+
+  const container = document.getElementById('product-container');
+
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.classList.add('product-card');
+
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>${product.price} JOD</p>
+    `;
+
+    container.appendChild(card);
+  });
+});
 
 // مثال:
 const newProduct = {
